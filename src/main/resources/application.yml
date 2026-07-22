@@ -1,0 +1,90 @@
+# ==================== DEFAULT PROFILE (H2) ====================
+spring:
+  config:
+    activate:
+      on-profile: default
+
+  application:
+    name: expense-tracker
+
+  datasource:
+    url: jdbc:h2:file:./data/expense_tracker;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always   # runs data.sql (idempotent) on every startup
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd
+    time-zone: UTC
+
+server:
+  port: 8080
+
+---
+# ==================== MYSQL PROFILE (for Railway) ====================
+spring:
+  config:
+    activate:
+      on-profile: mysql
+
+  application:
+    name: expense-tracker
+
+  datasource:
+    # Construct the URL from Railway's environment variables
+    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:expense}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:}
+
+  jpa:
+    hibernate:
+      ddl-auto: update          # creates/updates tables; change to 'validate' for production
+    show-sql: false             # set to true for debugging
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+    defer-datasource-initialization: false   # we won't run data.sql for mysql (optional)
+
+  sql:
+    init:
+      mode: never               # prevents accidental run of data.sql
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd
+    time-zone: UTC
+
+server:
+  # Railway injects the PORT environment variable – use it, fallback to 8080 for local testing with mysql profile
+  port: ${PORT:8080}
