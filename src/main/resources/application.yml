@@ -1,4 +1,4 @@
-# ==================== DEFAULT PROFILE (H2) ====================
+# ==================== DEFAULT PROFILE (H2 - Local Development) ====================
 spring:
   config:
     activate:
@@ -26,7 +26,7 @@ spring:
 
   sql:
     init:
-      mode: always   # runs data.sql (idempotent) on every startup
+      mode: always
 
   servlet:
     multipart:
@@ -43,7 +43,7 @@ server:
   port: 8080
 
 ---
-# ==================== MYSQL PROFILE (for Railway) ====================
+# ==================== MYSQL PROFILE (Optional) ====================
 spring:
   config:
     activate:
@@ -53,7 +53,6 @@ spring:
     name: expense-tracker
 
   datasource:
-    # Construct the URL from Railway's environment variables
     url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:expense}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MYSQLUSER:root}
@@ -61,18 +60,18 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update          # creates/updates tables; change to 'validate' for production
-    show-sql: false             # set to true for debugging
+      ddl-auto: update
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
     open-in-view: false
-    defer-datasource-initialization: false   # we won't run data.sql for mysql (optional)
+    defer-datasource-initialization: false
 
   sql:
     init:
-      mode: never               # prevents accidental run of data.sql
+      mode: never
 
   servlet:
     multipart:
@@ -86,5 +85,50 @@ spring:
     time-zone: UTC
 
 server:
-  # Railway injects the PORT environment variable – use it, fallback to 8080 for local testing with mysql profile
+  port: ${PORT:8080}
+
+---
+# ==================== POSTGRES PROFILE (for Render) ====================
+spring:
+  config:
+    activate:
+      on-profile: postgres
+
+  application:
+    name: expense-tracker
+
+  datasource:
+    # Render automatically injects PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD
+    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:postgres}
+    driver-class-name: org.postgresql.Driver
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD:}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    defer-datasource-initialization: false
+
+  sql:
+    init:
+      mode: never
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd
+    time-zone: UTC
+
+server:
   port: ${PORT:8080}
