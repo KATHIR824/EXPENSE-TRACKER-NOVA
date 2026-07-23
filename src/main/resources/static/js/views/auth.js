@@ -87,9 +87,9 @@ export function renderAuthView(container) {
         } else {
             slot.innerHTML = `
                 <form id="register-form">
-                    <div class="field-row">
-                        <div class="field"><label>First name</label><input class="input" name="firstName" placeholder="Jordan" required minlength="2"></div>
-                        <div class="field"><label>Last name</label><input class="input" name="lastName" placeholder="Rivera" required minlength="2"></div>
+                    <div class="field">
+                        <label>Name</label>
+                        <input class="input" name="name" placeholder="Kathiravan E" required minlength="2">
                     </div>
                     <div class="field">
                         <label>Email</label>
@@ -120,8 +120,7 @@ export function renderAuthView(container) {
                 btn.innerHTML = 'Creating account&hellip;';
                 try {
                     const res = await api.post('/auth/register', {
-                        firstName: fd.get('firstName'),
-                        lastName: fd.get('lastName'),
+                        name: fd.get('name'),
                         email: fd.get('email'),
                         password: fd.get('password')
                     });
