@@ -89,7 +89,7 @@ export function renderLandingView(container) {
 
         <footer class="footer-bar">
             <div>&copy; ${new Date().getFullYear()} Nova Finance</div>
-            <div>Built for people who like their numbers honest.</div>
+           <div>Built by Kathiravan E</div>
         </footer>
     `;
 }
