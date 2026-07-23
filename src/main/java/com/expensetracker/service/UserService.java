@@ -33,8 +33,7 @@ public class UserService {
         User user = userRepository.findByIdAndIsActiveTrue(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
-        if (userDTO.getFirstName() != null) user.setFirstName(userDTO.getFirstName());
-        if (userDTO.getLastName() != null) user.setLastName(userDTO.getLastName());
+        if (userDTO.getName() != null) user.setName(userDTO.getName());
         if (userDTO.getPhoneNumber() != null) user.setPhoneNumber(userDTO.getPhoneNumber());
         if (userDTO.getProfileImageUrl() != null) user.setProfileImageUrl(userDTO.getProfileImageUrl());
         if (userDTO.getMonthlyIncome() != null) user.setMonthlyIncome(userDTO.getMonthlyIncome());
@@ -55,8 +54,7 @@ public class UserService {
     private UserDTO toDTO(User user) {
         return UserDTO.builder()
                 .id(user.getId())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
+                .name(user.getName())
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
                 .profileImageUrl(user.getProfileImageUrl())
