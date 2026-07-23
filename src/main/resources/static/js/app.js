@@ -14,7 +14,7 @@ import { renderProfileView } from './views/profile.js';
 const appContainer = document.getElementById('app');
 
 const routes = {
-    '/': { render: renderDashboardView, title: 'Overview' },
+    '/dashboard': { render: renderDashboardView, title: 'Overview' },
     '/expenses': { render: renderExpensesView, title: 'Expenses' },
     '/income': { render: renderIncomeView, title: 'Income' },
     '/budgets': { render: renderBudgetsView, title: 'Budgets' },
@@ -77,16 +77,25 @@ export function logout() {
 function handleRoute() {
     const path = window.location.pathname;
 
+    // Unauthenticated users always see landing or auth
     if (!isAuthenticated()) {
         if (path === '/login') renderAuth();
         else renderLanding();
         return;
     }
 
+    // Authenticated users: redirect root (/) to /dashboard
+    if (path === '/') {
+        history.replaceState(null, null, '/dashboard');
+        handleRoute(); // Recursively handle the new route
+        return;
+    }
+
     if (!document.querySelector('.dashboard-layout')) renderLayout();
 
-    const match = routes[path] || routes['/'];
-    updateActiveNav(path in routes ? path : '/');
+    const match = routes[path] || routes['/dashboard'];
+    const displayPath = path in routes ? path : '/dashboard';
+    updateActiveNav(displayPath);
     updateFab(path);
     setPageTitle(match.title);
 
@@ -150,7 +159,7 @@ function renderLayout() {
                     <span style="font-family:var(--font-display);font-weight:800;font-size:1.1rem;">Dre Russ</span>
                 </div>
                 <nav class="sidebar-nav">
-                    <a href="/" class="nav-item active" data-link><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+                    <a href="/dashboard" class="nav-item active" data-link><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
                     <a href="/expenses" class="nav-item" data-link><i data-lucide="arrow-down-circle"></i><span>Expenses</span></a>
                     <a href="/income" class="nav-item" data-link><i data-lucide="arrow-up-circle"></i><span>Income</span></a>
                     <a href="/budgets" class="nav-item" data-link><i data-lucide="target"></i><span>Budgets</span></a>
