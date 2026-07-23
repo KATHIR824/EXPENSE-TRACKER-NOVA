@@ -147,7 +147,7 @@ function renderLayout() {
             <aside class="sidebar" id="sidebar">
                 <div class="sidebar-header">
                     <div class="brand-mark" style="width:30px;height:30px;"><i data-lucide="orbit" style="width:16px;height:16px;"></i></div>
-                    <span style="font-family:var(--font-display);font-weight:800;font-size:1.1rem;">Nova</span>
+                    <span style="font-family:var(--font-display);font-weight:800;font-size:1.1rem;">Dre Russ</span>
                 </div>
                 <nav class="sidebar-nav">
                     <a href="/" class="nav-item active" data-link><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
@@ -157,7 +157,7 @@ function renderLayout() {
                     <a href="/savings" class="nav-item" data-link><i data-lucide="piggy-bank"></i><span>Savings goals</span></a>
                     <a href="/categories" class="nav-item" data-link><i data-lucide="tags"></i><span>Categories</span></a>
                 </nav>
-               <div class="sidebar-footer">
+                <div class="sidebar-footer">
                     <a href="/profile" class="user-profile-btn" data-link>
                         <div class="user-avatar">${(user.name || 'U').charAt(0).toUpperCase()}</div>
                         <div class="user-info">
@@ -165,8 +165,6 @@ function renderLayout() {
                             <div class="user-email">${user.email || ''}</div>
                         </div>
                     </a>
-                    <button class="btn btn-secondary btn-block mt-4" id="btn-logout"><i data-lucide="log-out"></i> Sign out</button>
-                </div>
                     <button class="btn btn-secondary btn-block mt-4" id="btn-logout"><i data-lucide="log-out"></i> Sign out</button>
                 </div>
             </aside>
