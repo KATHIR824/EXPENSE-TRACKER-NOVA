@@ -8,7 +8,7 @@ export function renderAuthView(container) {
         <div class="auth-card" id="auth-card">
             <div class="auth-logo">
                 <div class="brand-mark"><i data-lucide="orbit"></i></div>
-                <span style="font-family:var(--font-display);font-weight:800;font-size:1.3rem;">Nova</span>
+               <span style="font-family:var(--font-display);font-weight:800;font-size:1.3rem;">Dre Russ</span>
             </div>
             <div class="auth-tabs">
                 <div class="auth-tab active" data-mode="login">Sign in</div>
