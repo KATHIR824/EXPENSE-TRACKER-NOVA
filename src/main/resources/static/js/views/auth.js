@@ -19,16 +19,6 @@ export function renderAuthView(container) {
         </div>
     `;
 
-    const card = document.getElementById('auth-card');
-    card.addEventListener('mousemove', (e) => {
-        if (window.innerWidth <= 768) return;
-        const rect = card.getBoundingClientRect();
-        const rotY = (((e.clientX - rect.left) / rect.width) - 0.5) * 6;
-        const rotX = (((e.clientY - rect.top) / rect.height) - 0.5) * -6;
-        card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-    });
-    card.addEventListener('mouseleave', () => { card.style.transform = 'rotateX(0) rotateY(0)'; });
-
     container.querySelectorAll('.auth-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             mode = tab.dataset.mode;
