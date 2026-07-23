@@ -1,0 +1,6 @@
+-- Predefined categories are now seeded in Java, not here.
+-- See: com.expensetracker.config.DefaultCategorySeeder
+-- That runs on every startup regardless of active profile (H2/MySQL/Postgres),
+-- unlike this file, which only executed automatically under the default/H2
+-- profile (spring.sql.init.mode: always). To add/edit/remove a predefined
+-- category, edit the DEFAULTS list in DefaultCategorySeeder.java.
