@@ -89,7 +89,7 @@ export function renderAuthView(container) {
                 <form id="register-form">
                     <div class="field">
                         <label>Name</label>
-                        <input class="input" name="name" placeholder="Kathiravan E" required minlength="2">
+                        <input class="input" name="name" placeholder="eg. Kathiravan E" required minlength="2">
                     </div>
                     <div class="field">
                         <label>Email</label>
