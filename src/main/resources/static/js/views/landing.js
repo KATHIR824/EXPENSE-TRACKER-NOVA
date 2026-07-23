@@ -1,7 +1,7 @@
 export function renderLandingView(container) {
     container.innerHTML = `
         <nav class="nav-bar">
-            <div class="brand"><div class="brand-mark"><i data-lucide="orbit"></i></div>Nova</div>
+            <div class="brand"><div class="brand-mark"><i data-lucide="orbit"></i></div>Dre Russ</div>
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#how">How it works</a>
@@ -13,7 +13,7 @@ export function renderLandingView(container) {
         <section class="hero">
             <div class="hero-badge"><i data-lucide="sparkles" style="width:14px;height:14px;"></i> Now with automatic PDF statement import</div>
             <h1>Money, finally in <span class="text-gradient">motion.</span></h1>
-            <p class="hero-sub">Nova turns scattered expenses, income, budgets, and savings goals into one living dashboard &mdash; built to feel as good as it looks.</p>
+            <p class="hero-sub">Dre Russ turns scattered expenses, income, budgets, and savings goals into one living dashboard &mdash; built to feel as good as it looks.</p>
             <div class="hero-cta">
                 <a href="/login" data-link class="btn btn-primary">Start free <i data-lucide="arrow-right"></i></a>
                 <a href="#features" class="btn btn-secondary">See how it works</a>
@@ -57,7 +57,7 @@ export function renderLandingView(container) {
                 <div class="card tilt feature-card">
                     <div class="feature-icon"><i data-lucide="file-up"></i></div>
                     <h3>Import from PDF</h3>
-                    <p>Drop in a bank statement and Nova extracts transactions automatically &mdash; no manual entry marathon.</p>
+                    <p>Drop in a bank statement and Dre Russ extracts transactions automatically &mdash; no manual entry marathon.</p>
                 </div>
             </div>
         </section>
@@ -88,8 +88,8 @@ export function renderLandingView(container) {
         </div>
 
         <footer class="footer-bar">
-            <div>&copy; ${new Date().getFullYear()} Nova Finance</div>
-           <div>Built by Kathiravan E</div>
+            <div>&copy; ${new Date().getFullYear()} Dre Russ Finance</div>
+            <div>Built by Kathiravan E</div>
         </footer>
     `;
 }
