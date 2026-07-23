@@ -157,14 +157,16 @@ function renderLayout() {
                     <a href="/savings" class="nav-item" data-link><i data-lucide="piggy-bank"></i><span>Savings goals</span></a>
                     <a href="/categories" class="nav-item" data-link><i data-lucide="tags"></i><span>Categories</span></a>
                 </nav>
-                <div class="sidebar-footer">
+               <div class="sidebar-footer">
                     <a href="/profile" class="user-profile-btn" data-link>
-                        <div class="user-avatar">${(user.firstName || 'U').charAt(0).toUpperCase()}</div>
+                        <div class="user-avatar">${(user.name || 'U').charAt(0).toUpperCase()}</div>
                         <div class="user-info">
-                            <div class="user-name">${user.firstName || 'User'} ${user.lastName || ''}</div>
+                            <div class="user-name">${user.name || 'User'}</div>
                             <div class="user-email">${user.email || ''}</div>
                         </div>
                     </a>
+                    <button class="btn btn-secondary btn-block mt-4" id="btn-logout"><i data-lucide="log-out"></i> Sign out</button>
+                </div>
                     <button class="btn btn-secondary btn-block mt-4" id="btn-logout"><i data-lucide="log-out"></i> Sign out</button>
                 </div>
             </aside>
