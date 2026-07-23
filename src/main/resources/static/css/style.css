@@ -132,13 +132,14 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
 body {
     font-family: var(--font-body);
     background: var(--bg-void);
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
+    width: 100%;
     overflow-x: hidden;
     transition: background var(--t-base) var(--ease-out), color var(--t-base) var(--ease-out);
 }
@@ -416,7 +417,7 @@ textarea.input { resize: vertical; min-height: 100px; }
 .btn-icon svg, .btn-icon i { width: 18px; height: 18px; }
 .mobile-menu-btn { display: none; }
 
-.main-content { flex: 1; padding: var(--sp-6); }
+.main-content { flex: 1; padding: var(--sp-6); min-width: 0; max-width: 100%; }
 
 /* ---- FAB ---- */
 .fab {
@@ -443,7 +444,7 @@ textarea.input { resize: vertical; min-height: 100px; }
 .range-pill.active { background: var(--grad-primary); color: var(--text-inverse); }
 
 /* ---- Table ---- */
-.table-responsive { overflow-x: auto; }
+.table-responsive { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
 .table { width: 100%; border-collapse: collapse; }
 .table th {
     text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
@@ -562,4 +563,12 @@ textarea.input { resize: vertical; min-height: 100px; }
     .nav-links { display: none; }
     .card-header { flex-direction: column; align-items: flex-start; }
     .feature-grid { grid-template-columns: 1fr; }
+
+    /* Header action rows (Expenses / Income: Import PDF, Export, Add) —
+       wrap instead of overflowing the viewport width like Budgets/Categories do. */
+    .gap-3 { flex-wrap: wrap; width: 100%; }
+    .gap-3 .btn { flex: 1 1 auto; }
+}
+@media (max-width: 480px) {
+    .gap-3 .btn { flex: 1 1 100%; white-space: normal; }
 }
