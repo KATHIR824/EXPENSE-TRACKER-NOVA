@@ -4,7 +4,6 @@ import com.expensetracker.entity.Category;
 import com.expensetracker.repository.CategoryRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 /**
