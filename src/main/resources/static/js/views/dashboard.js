@@ -39,6 +39,14 @@ function deltaHtml(current, previous) {
 }
 
 export async function renderDashboardView(container) {
+    // Listen for currency changes from profile settings
+    window.addEventListener('currencyChanged', (e) => {
+        const newCurrency = e.detail;
+        localStorage.setItem('userCurrency', newCurrency);
+        // Re-render dashboard with new currency
+        renderDashboardView(container);
+    });
+
     container.innerHTML = `
         <div class="flex items-center justify-between mb-6" style="flex-wrap:wrap;gap:.75rem;">
             <div class="range-pills" id="range-tabs">
