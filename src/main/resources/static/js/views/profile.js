@@ -2,7 +2,6 @@ import { api, getUser, clearAuth } from '../api.js';
 import { showToast } from '../components/toast.js';
 import { openModal, closeModal } from '../components/modal.js';
 import { applyTilt } from '../components/tilt.js';
-
 const CURRENCIES = ['USD', 'EUR', 'GBP', 'INR', 'JPY', 'CAD', 'AUD', 'CNY'];
 
 export async function renderProfileView(container) {
