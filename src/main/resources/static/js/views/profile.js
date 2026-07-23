@@ -41,8 +41,7 @@ export async function renderProfileView(container) {
     slot.innerHTML = `
         <form id="profile-form">
             <div class="field">
-                <label>Name</label>
-                <input class="input" name="name" required minlength="2" placeholder="Kathiravan E" value="${user.name || ''}">
+                <label>Name</label><input class="input" name="name" required minlength="2" placeholder="eg. Kathiravan E" value="${user.name || ''}">
             </div>
             <div class="field"><label>Email</label><input class="input" type="email" name="email" required value="${user.email || ''}"></div>
             <div class="field-row">
