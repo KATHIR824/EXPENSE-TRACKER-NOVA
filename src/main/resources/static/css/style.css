@@ -132,14 +132,13 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
 body {
     font-family: var(--font-body);
     background: var(--bg-void);
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
-    width: 100%;
     overflow-x: hidden;
     transition: background var(--t-base) var(--ease-out), color var(--t-base) var(--ease-out);
 }
@@ -268,7 +267,7 @@ p { color: var(--text-secondary); }
 .btn-danger { background: var(--danger-red-soft); color: var(--danger-red); }
 .btn-danger:hover { background: rgba(248, 113, 113, 0.22); }
 .btn-sm { padding: 0.5rem 1rem; font-size: 0.85rem; }
-.btn-icon-only { width: 40px; height: 40px; padding: 0; border-radius: var(--radius-full); }
+.btn-icon-only { width: 44px; height: 44px; padding: 0; border-radius: var(--radius-full); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 .btn-block { width: 100%; }
 
@@ -414,10 +413,11 @@ textarea.input { resize: vertical; min-height: 100px; }
     color: var(--text-primary);
     border-color: var(--border-glass-strong);
 }
-.btn-icon svg, .btn-icon i { width: 18px; height: 18px; }
+.btn-icon svg, .btn-icon i { width: 20px; height: 20px; }
+.btn-icon-only svg, .btn-icon-only i { width: 20px; height: 20px; }
 .mobile-menu-btn { display: none; }
 
-.main-content { flex: 1; padding: var(--sp-6); min-width: 0; max-width: 100%; }
+.main-content { flex: 1; padding: var(--sp-6); }
 
 /* ---- FAB ---- */
 .fab {
@@ -444,7 +444,7 @@ textarea.input { resize: vertical; min-height: 100px; }
 .range-pill.active { background: var(--grad-primary); color: var(--text-inverse); }
 
 /* ---- Table ---- */
-.table-responsive { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
+.table-responsive { overflow-x: auto; }
 .table { width: 100%; border-collapse: collapse; }
 .table th {
     text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
@@ -563,12 +563,4 @@ textarea.input { resize: vertical; min-height: 100px; }
     .nav-links { display: none; }
     .card-header { flex-direction: column; align-items: flex-start; }
     .feature-grid { grid-template-columns: 1fr; }
-
-    /* Header action rows (Expenses / Income: Import PDF, Export, Add) —
-       wrap instead of overflowing the viewport width like Budgets/Categories do. */
-    .gap-3 { flex-wrap: wrap; width: 100%; }
-    .gap-3 .btn { flex: 1 1 auto; }
-}
-@media (max-width: 480px) {
-    .gap-3 .btn { flex: 1 1 100%; white-space: normal; }
 }
