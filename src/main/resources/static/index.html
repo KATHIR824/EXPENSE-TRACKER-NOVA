@@ -11,8 +11,15 @@
 
     <link rel="stylesheet" href="/css/style.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <!-- async (not defer): these are optional/non-blocking libraries used opportunistically by
+         the app (see the `if (window.lucide)` / chart guards in app.js and the view files). Using
+         `defer` here forced the browser to wait for these third-party CDN requests to finish, in
+         order, before DOMContentLoaded could fire — and since app.js only boots on DOMContentLoaded,
+         a slow/blocked CDN request (ad blockers, flaky network, unpkg's "@latest" resolution) left
+         the app stuck forever on the boot-loader spinner. async lets them load independently without
+         gating our own app's startup. -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" async></script>
+    <script src="https://unpkg.com/lucide@0.469.0" async></script>
 
     <script type="module" src="/js/app.js" defer></script>
 </head>
