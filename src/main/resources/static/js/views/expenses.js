@@ -31,16 +31,19 @@ export async function renderExpensesView(container) {
     async function load() {
         try {
             const [expRes, catRes] = await Promise.all([api.get('/expenses'), api.get('/categories')]);
+            if (!container.isConnected) return; // view was navigated away from before this resolved
             expenses = (expRes.data || []).sort((a, b) => new Date(b.expenseDate) - new Date(a.expenseDate));
             categories = catRes.data || [];
             renderTable();
         } catch (err) {
+            if (!container.isConnected) return;
             showToast(err.message, 'error');
         }
     }
 
     function renderTable() {
         const tbody = document.querySelector('#expenses-table tbody');
+        if (!tbody) return; // view was torn down mid-render
         if (!expenses.length) {
             tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="empty-icon"><i data-lucide="receipt"></i></div><h3>No expenses yet</h3><p>Log your first expense to start tracking where money goes.</p><button class="btn btn-primary" id="empty-add-expense"><i data-lucide="plus"></i> Add expense</button></div></td></tr>`;
             if (window.lucide) window.lucide.createIcons();
