@@ -32,15 +32,18 @@ export async function renderIncomeView(container) {
     async function load() {
         try {
             const res = await api.get('/incomes');
+            if (!container.isConnected) return; // view was navigated away from before this resolved
             incomes = (res.data || []).sort((a, b) => new Date(b.incomeDate) - new Date(a.incomeDate));
             renderTable();
         } catch (err) {
+            if (!container.isConnected) return;
             showToast(err.message, 'error');
         }
     }
 
     function renderTable() {
         const tbody = document.querySelector('#income-table tbody');
+        if (!tbody) return; // view was torn down mid-render
         if (!incomes.length) {
             tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><div class="empty-icon"><i data-lucide="wallet"></i></div><h3>No income logged yet</h3><p>Add your first paycheck or payment to see your inflow.</p><button class="btn btn-primary" id="empty-add-income"><i data-lucide="plus"></i> Add income</button></div></td></tr>`;
             if (window.lucide) window.lucide.createIcons();
