@@ -7,16 +7,14 @@ function getToken() {
 export function setAuth(data) {
     if (data.token) localStorage.setItem('token', data.token);
     if (data.userId) localStorage.setItem('userId', data.userId);
-    if (data.firstName) localStorage.setItem('firstName', data.firstName);
-    if (data.lastName) localStorage.setItem('lastName', data.lastName);
+    if (data.name) localStorage.setItem('name', data.name);
     if (data.email) localStorage.setItem('email', data.email);
 }
 
 export function clearAuth() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-    localStorage.removeItem('firstName');
-    localStorage.removeItem('lastName');
+    localStorage.removeItem('name');
     localStorage.removeItem('email');
 }
 
@@ -27,8 +25,7 @@ export function isAuthenticated() {
 export function getUser() {
     return {
         id: localStorage.getItem('userId'),
-        firstName: localStorage.getItem('firstName'),
-        lastName: localStorage.getItem('lastName'),
+        name: localStorage.getItem('name'),
         email: localStorage.getItem('email')
     };
 }
