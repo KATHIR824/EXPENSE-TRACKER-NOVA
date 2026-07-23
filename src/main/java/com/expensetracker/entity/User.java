@@ -28,15 +28,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "First name is required")
-    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
-    @Column(name = "first_name", nullable = false, length = 50)
-    private String firstName;
-
-    @NotBlank(message = "Last name is required")
-    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
-    @Column(name = "last_name", nullable = false, length = 50)
-    private String lastName;
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
+    @Column(name = "name", nullable = false, length = 100)
+    private String name;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be valid")
