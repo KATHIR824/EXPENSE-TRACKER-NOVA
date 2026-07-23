@@ -223,4 +223,10 @@ export function refreshIcons() {
     if (window.lucide) window.lucide.createIcons();
 }
 
-document.addEventListener('DOMContentLoaded', initApp);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    // DOMContentLoaded already fired before this module ran — boot immediately instead of
+    // waiting on an event that will never come again.
+    initApp();
+}
