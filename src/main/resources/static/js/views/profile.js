@@ -11,9 +11,9 @@ export async function renderProfileView(container) {
             <div class="card tilt">
                 <div class="card-header">
                     <div class="flex items-center gap-4">
-                        <div class="user-avatar" style="width:56px;height:56px;font-size:1.3rem;">${(localUser.firstName || 'U').charAt(0).toUpperCase()}</div>
+                        <div class="user-avatar" style="width:56px;height:56px;font-size:1.3rem;">${(localUser.name || 'U').charAt(0).toUpperCase()}</div>
                         <div>
-                            <h3 style="margin-bottom:2px;">${localUser.firstName || ''} ${localUser.lastName || ''}</h3>
+                            <h3 style="margin-bottom:2px;">${localUser.name || ''}</h3>
                             <div style="font-size:.84rem;color:var(--text-muted);">${localUser.email || ''}</div>
                         </div>
                     </div>
@@ -34,15 +34,15 @@ export async function renderProfileView(container) {
         user = res.data || {};
     } catch (err) {
         showToast(err.message, 'error');
-        user = { firstName: localUser.firstName, lastName: localUser.lastName, email: localUser.email, currency: 'USD' };
+        user = { name: localUser.name, email: localUser.email, currency: 'USD' };
     }
 
     const slot = document.getElementById('profile-form-slot');
     slot.innerHTML = `
         <form id="profile-form">
-            <div class="field-row">
-                <div class="field"><label>First name</label><input class="input" name="firstName" required minlength="2" value="${user.firstName || ''}"></div>
-                <div class="field"><label>Last name</label><input class="input" name="lastName" required minlength="2" value="${user.lastName || ''}"></div>
+            <div class="field">
+                <label>Name</label>
+                <input class="input" name="name" required minlength="2" placeholder="Kathiravan E" value="${user.name || ''}">
             </div>
             <div class="field"><label>Email</label><input class="input" type="email" name="email" required value="${user.email || ''}"></div>
             <div class="field-row">
@@ -62,8 +62,7 @@ export async function renderProfileView(container) {
         ev.preventDefault();
         const fd = new FormData(ev.target);
         const payload = {
-            firstName: fd.get('firstName'),
-            lastName: fd.get('lastName'),
+            name: fd.get('name'),
             email: fd.get('email'),
             phoneNumber: fd.get('phoneNumber') || null,
             monthlyIncome: fd.get('monthlyIncome') ? parseFloat(fd.get('monthlyIncome')) : null,
@@ -76,7 +75,7 @@ export async function renderProfileView(container) {
         btn.disabled = true;
         try {
             await api.put(`/users/${localUser.id}`, payload);
-            setAuth({ firstName: payload.firstName, lastName: payload.lastName, email: payload.email });
+            setAuth({ name: payload.name, email: payload.email });
             showToast('Profile updated', 'success');
             setTimeout(() => window.location.reload(), 600);
         } catch (err) {
